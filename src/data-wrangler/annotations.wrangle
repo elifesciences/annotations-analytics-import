@@ -1,0 +1,54 @@
+unnest col: column1 keys: 'rows' pluck: true
+drop col: column1
+flatten col: rows
+unnest col: rows keys: 'created'
+unnest col: rows keys: 'document'
+unnest col: rows keys: 'flagged'
+unnest col: rows keys: 'group'
+unnest col: rows keys: 'hidden'
+unnest col: rows keys: 'id'
+unnest col: rows keys: 'links'
+unnest col: rows keys: 'tags'
+unnest col: rows keys: 'text'
+unnest col: rows keys: 'updated'
+unnest col: rows keys: 'uri'
+unnest col: rows keys: 'user'
+unnest col: rows keys: 'user_info'
+drop col: rows
+extract col: user on: `{url}` after: `:` before: `{end}`
+drop col: user
+rename col: user1 to: 'user_email'
+unnest col: user_info keys: 'display_name'
+drop col: user_info
+settype col: updated type: 'Datetime','yy-mm-dd hh:mm:ss','yyyymmddHHMMSS'
+settype col: tags type: 'Array'
+unnest col: links keys: 'html'
+unnest col: links keys: 'incontext'
+unnest col: links keys: 'json'
+rename col: json to: 'link_to_json'
+rename col: incontext to: 'link_to_incontext'
+rename col: html to: 'link_to_html'
+drop col: links
+rename col: group1 to: 'publisher_group'
+unnest col: document keys: 'title'
+drop col: document
+settype col: title type: 'String'
+settype col: tags type: 'String'
+move col: updated after: created
+move col: id before: display_name
+extract col: created on: `{digit}{4}-{digit}{2}-{digit}{2}` after: `{start}` before: `T`
+extract col: created on: `\+{digit}{2}:{digit}{2}` after: `.{digit}{6}` before: `{end}`
+extract col: created on: `{time}`
+rename col: created5 to: 'created_time'
+rename col: created3 to: 'created_timezone'
+rename col: created1 to: 'created_date'
+merge col: created_date,created_time,created_timezone with: ' ' as: 'created_datetime'
+drop col: created
+extract col: updated on: `{digit}{4}-{digit}{2}-{digit}{2}` after: `{start}` before: `T`
+extract col: updated on: `\+{digit}{2}:{digit}{2}` after: `.{digit}{6}` before: `{end}`
+extract col: updated on: `{time}`
+rename col: updated3 to: 'updated_time'
+rename col: updated2 to: 'updated_timezone'
+rename col: updated1 to: 'updated_date'
+merge col: updated_date,updated_time,updated_timezone with: ' ' as: 'updated_datetime'
+drop col: updated
