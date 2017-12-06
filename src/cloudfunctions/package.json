@@ -1,0 +1,24 @@
+{
+  "name": "cloudfunctions",
+  "version": "1.0.0",
+  "description": "Cloud Function for fetching hypothesis annotations",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/storage": "^1.5.1",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elifesciences/annotations-analytics-import.git"
+  },
+  "author": "BlueReZZ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elifesciences/annotations-analytics-import/issues"
+  },
+  "homepage": "https://github.com/elifesciences/annotations-analytics-import#readme"
+}
