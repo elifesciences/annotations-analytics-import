@@ -22,12 +22,10 @@ unnest col: user_info keys: 'display_name'
 drop col: user_info
 settype col: updated type: 'Datetime','yy-mm-dd hh:mm:ss','yyyymmddHHMMSS'
 settype col: tags type: 'Array'
-unnest col: links keys: 'html'
 unnest col: links keys: 'incontext'
 unnest col: links keys: 'json'
 rename col: json to: 'link_to_json'
 rename col: incontext to: 'link_to_incontext'
-rename col: html to: 'link_to_html'
 drop col: links
 rename col: group1 to: 'publisher_group'
 unnest col: document keys: 'title'
