@@ -6,7 +6,7 @@ const storage = Storage({
 });
 
 exports.fetchAnnotations = function(req, res) {
-  request('https://hypothes.is/api/search?group=imRGyeeV', function (error, response, body) {
+  request('https://hypothes.is/api/search?group=imRGyeeV&limit=200', function (error, response, body) {
 
     var annotationsBucket = storage.bucket('elife-annotations-export');
     var file = annotationsBucket.file('annotations-generated.json');
